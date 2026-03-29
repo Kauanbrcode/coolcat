@@ -42,10 +42,6 @@ coolcat/
 
 ---
 
-## 🚀 Como rodar
-
-Só abrir o `index.html` no navegador. Sem dependências, sem build, sem frescura.
-
 ```bash
 # Se quiser um servidor local simples:
 npx serve .
@@ -55,14 +51,6 @@ python3 -m http.server 3000
 
 ---
 
-## 🌐 Como subir no GitHub Pages
-
-1. Sobe o projeto no GitHub
-2. Vai em **Settings → Pages**
-3. Escolhe a branch `main` e pasta `/root`
-4. Salva — em alguns minutos o site tá no ar
-
----
 
 ## 🎨 Stack
 
