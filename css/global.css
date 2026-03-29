@@ -1,0 +1,92 @@
+/* ════════════════════════════════════════════════════
+   COOL CAT // global.css
+   Variáveis, reset e componentes compartilhados
+════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700&display=swap');
+
+/* ── VARIÁVEIS ── */
+:root {
+  --bg:        #0c0c0c;
+  --bg2:       #111111;
+  --bg3:       #181818;
+  --bg4:       #222222;
+  --borda:     #2a2a2a;
+  --borda2:    #383838;
+  --txt:       #e8e8e8;
+  --txt2:      #aaaaaa;
+  --txt3:      #666666;
+  --red:       #cc1111;
+  --red-hot:   #ff2222;
+  --red-dark:  #7a0a0a;
+  --red-glow:  rgba(204,17,17,.35);
+  --mono:      'Share Tech Mono', monospace;
+  --titulo:    'Bebas Neue', sans-serif;
+  --corpo:     'Barlow Condensed', sans-serif;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--corpo);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── TEXTURA CONCRETO ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .045;
+  mix-blend-mode: screen;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── TOAST ── */
+.toast-container {
+  position: fixed; bottom: 24px; right: 20px;
+  z-index: 9999; display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none;
+}
+.toast {
+  padding: 12px 18px;
+  font-family: var(--mono); font-size: .72rem;
+  letter-spacing: .08em; text-transform: uppercase;
+  max-width: 320px; min-width: 200px;
+  transform: translateY(60px); opacity: 0;
+  transition: transform .3s ease, opacity .3s ease;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.ok   { background: #fff; color: #000; border-left: 4px solid var(--red); box-shadow: 4px 4px 0 rgba(0,0,0,.4); }
+.toast.info { background: var(--red); color: #fff; border-left: 4px solid var(--red-dark); box-shadow: 4px 4px 0 rgba(0,0,0,.4); }
+.toast.err  { background: var(--bg3); color: var(--red-hot); border: 1px solid var(--red); border-left: 4px solid var(--red); box-shadow: 4px 4px 0 rgba(0,0,0,.4); }
+
+/* ── RIPPLE ── */
+@keyframes ripple { to { transform: scale(3); opacity: 0; } }
+.ripple-el {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  transform: scale(0); animation: ripple .5s linear;
+  pointer-events: none;
+}
+
+/* ── ANIMAÇÃO DE ENTRADA ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

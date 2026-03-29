@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COOL CAT // Loja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/loja.css" />
+</head>
+<body>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="tb-hamburger" id="btnMenu">☰</button>
+    <a href="../index.html" class="tb-logo">COOL <span>CAT</span></a>
+    <input type="text" class="tb-search" id="searchInput" placeholder="Buscar roupa..." />
+    <div class="tb-acoes">
+      <button class="tb-btn" id="btnCarrinho" title="Carrinho">
+        🛍
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- OVERLAY + SIDEBAR -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">COOL <span>CAT</span></div>
+      <div class="sidebar-sub">Disgrama Online</div>
+    </div>
+    <div class="sidebar-nav">
+      <a onclick="filtrarCategoria('tudo', this)" class="ativo"><span class="nav-icon">🏠</span> Início</a>
+      <a onclick="filtrarCategoria('camiseta', this)"><span class="nav-icon">👕</span> Camisetas</a>
+      <a onclick="filtrarCategoria('moletom', this)"><span class="nav-icon">🧥</span> Moletons</a>
+      <a onclick="filtrarCategoria('calca', this)"><span class="nav-icon">👖</span> Calças</a>
+      <a onclick="filtrarCategoria('bone', this)"><span class="nav-icon">🧢</span> Bonés</a>
+      <a onclick="filtrarCategoria('tenis', this)"><span class="nav-icon">👟</span> Tênis</a>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <strong id="sidebarUser">Parceiro</strong>
+        Membro da Disgrama
+      </div>
+      <button class="btn-logout" onclick="logout()">// Sair do Sistema</button>
+    </div>
+  </nav>
+
+  <!-- CONTEÚDO -->
+  <main class="loja-content">
+    <div class="hero">
+      <div class="hero-tag">// Disgrama Online — Est. 2026</div>
+      <h2 class="hero-titulo">Roupa das <span>Ruas</span></h2>
+      <p class="hero-desc">Moda da periferia, jeito das quebradas. Compra, troca e agita na Disgrama.</p>
+    </div>
+
+    <div class="filtros" id="filtros">
+      <button class="btn-filtro ativo" onclick="filtrarCategoria('tudo', this)">Tudo</button>
+      <button class="btn-filtro" onclick="filtrarCategoria('camiseta', this)">Camisetas</button>
+      <button class="btn-filtro" onclick="filtrarCategoria('moletom', this)">Moletons</button>
+      <button class="btn-filtro" onclick="filtrarCategoria('calca', this)">Calças</button>
+      <button class="btn-filtro" onclick="filtrarCategoria('bone', this)">Bonés</button>
+      <button class="btn-filtro" onclick="filtrarCategoria('tenis', this)">Tênis</button>
+    </div>
+
+    <div class="secao-label" id="secaoLabel">// todos os produtos</div>
+    <div class="grid-produtos" id="gridProdutos"></div>
+  </main>
+
+  <footer class="loja-footer">
+    <p>© 2026 <span>COOL CAT</span> // Disgrama Online // Rouba Não Potoca</p>
+  </footer>
+
+  <!-- MODAL CARRINHO -->
+  <div class="modal-overlay" id="modalCarrinho">
+    <div class="carrinho-drawer">
+      <div class="drawer-header">
+        <div class="drawer-titulo">Carrinho <span>// items</span></div>
+        <button class="btn-fechar-drawer" id="btnFecharCarrinho">✕</button>
+      </div>
+      <div class="drawer-items" id="drawerItems"></div>
+      <div class="drawer-footer" id="drawerFooter"></div>
+    </div>
+  </div>
+
+  <!-- MODAL TROCA -->
+  <div class="modal-troca-overlay" id="modalTroca">
+    <div class="modal-troca">
+      <div class="modal-troca-header">
+        <div class="modal-troca-titulo">Sistema de <span>Troca</span></div>
+        <button class="btn-fechar-troca" onclick="fecharTroca()">✕</button>
+      </div>
+      <div class="modal-troca-body">
+        <div class="troca-produto-info" id="trocaProdutoInfo"></div>
+        <div class="troca-campo">
+          <label>Seu nome, Parceiro</label>
+          <input type="text" id="trocaNome" placeholder="Como você se chama?" />
+        </div>
+        <div class="troca-campo">
+          <label>Contato (WhatsApp / Instagram)</label>
+          <input type="text" id="trocaContato" placeholder="@parceiro ou (11)99999-0000" />
+        </div>
+        <div class="troca-campo">
+          <label>O que você oferece na troca?</label>
+          <select id="trocaTipo">
+            <option value="">Seleciona o tipo...</option>
+            <option value="roupa">Roupa</option>
+            <option value="tenis">Tênis</option>
+            <option value="bone">Boné</option>
+            <option value="acessorio">Acessório</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="troca-campo">
+          <label>Descreve o que você tem</label>
+          <textarea id="trocaDesc" placeholder="Ex: Moletom Nike preto tam. M, sem uso..."></textarea>
+        </div>
+        <button class="btn-enviar-troca" onclick="enviarTroca()">PROPOR TROCA</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PRODUTO -->
+  <div class="modal-prod-overlay" id="modalProduto">
+    <div class="modal-prod" id="modalProdConteudo"></div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/dados.js"></script>
+  <script src="../js/carrinho.js"></script>
+  <script src="../js/troca.js"></script>
+  <script src="../js/loja.js"></script>
+</body>
+</html>
