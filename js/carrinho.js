@@ -31,7 +31,7 @@ function addCarrinho(id, e) {
 
   salvarCarrinho();
   atualizarBadge();
-  toast(`✔ ${p.nome} — adicionado!`, "ok");
+  toast(`✔ ${p.nome} — adicionado disgrama!`, "soh");
 }
 
 function removerCarrinho(id) {
@@ -69,7 +69,7 @@ function renderDrawer() {
     items.innerHTML = `
       <div class="drawer-vazio">
         <div class="drawer-vazio-ico">🛍</div>
-        <div class="drawer-vazio-txt">Carrinho vazio, parceiro.<br>Vai lá e escolhe uma peça!</div>
+        <div class="drawer-vazio-txt">Carrinho vazio, irmao,nao quer andar na estila.<br>Vai lá e escolhe uma peça disgrama!</div>
       </div>`;
     footer.innerHTML = "";
     return;
@@ -105,7 +105,7 @@ function finalizarCompra() {
   salvarCarrinho();
   atualizarBadge();
   fecharCarrinho();
-  toast("🔥 Pedido feito! Agora é só esperar, parceiro.", "ok");
+  toast("Essa disgrama ja foi feita,agora marca um 10 feyyy", "soh");
 }
 
 /* ── EVENTOS ── */
